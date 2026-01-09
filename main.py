@@ -12,14 +12,6 @@ rock_img_butt = tk.Button(game_tab, command=start_game, image=rock_img)
 rock_img_butt.pack()
 
 #Tab 2 functions
-def get_scores():
-    names=[['9/1/2026','4','3','Player'], #Temp score stroage
-           ['9/1/2026','4','3','Player'],
-           ['9/1/2026','4','3','Player'],
-           ['9/1/2026','4','3','Player'],]
-
-    return names
-
 display_scores_table(load_scores())
 
 win.mainloop()
