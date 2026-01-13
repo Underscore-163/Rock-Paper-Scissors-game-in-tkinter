@@ -11,7 +11,7 @@ welcome()
 
 rock_img_scaled=rock_img.subsample(2)
 
-rock_img_butt = tk.Button(game_tab, command=start_game, image=rock_img_scaled)
+rock_img_butt = tk.Button(start_frame, command=start_game, image=rock_img_scaled)
 rock_img_butt.grid(row=1,column=1,sticky='n')
 
 #Tab 2 functions

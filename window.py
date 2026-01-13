@@ -51,6 +51,12 @@ def display_score(player,computer):
     score_label = tk.Label(game_tab, text=f"Player: {player}  Computer: {computer}", font=("Arial", 15))
     score_label.grid(row=0,column=1)
 
+
+s=ttk.Style()
+s.theme_use('clam')
+s.configure('green_style',background='green')
+s.configure('Frame1.TFrame', background='sky blue')
+
 selection_menu = ttk.Notebook(win)
 
 #Tab 1
@@ -63,6 +69,18 @@ game_tab.columnconfigure(2,weight=1)
 game_tab.rowconfigure(0,weight=1)
 game_tab.rowconfigure(1,weight=1)
 game_tab.rowconfigure(2,weight=1)
+
+    #Inner frame start
+start_frame = ttk.Frame(game_tab,relief='flat',style='Frame1.TFrame')
+
+start_frame.columnconfigure(0,weight=1)
+start_frame.columnconfigure(1,weight=1)
+start_frame.columnconfigure(2,weight=1)
+start_frame.rowconfigure(0,weight=1)
+start_frame.rowconfigure(1,weight=1)
+start_frame.rowconfigure(2,weight=1)
+
+start_frame.grid(row=1,column=1)
 
     #Inner frame for player side
 selection_but_frame = ttk.Frame(game_tab,relief='raised')
@@ -89,8 +107,8 @@ selection_frame_comp.rowconfigure(2,weight=1)
 #selection_frame_comp.grid(row=2,column=0,sticky='e')
 
 def welcome():
-    welcome_label = tk.Label(game_tab, text="Welcome to Rock Paper Scissors!", font=("Arial", 20),bg='sky blue')
-    info_label = tk.Label(game_tab, text="Click one the hand to start the game!", font=("Arial", 15),bg='sky blue')
+    welcome_label = tk.Label(start_frame, text="Welcome to Rock Paper Scissors!", font=("Arial", 20),bg='sky blue')
+    info_label = tk.Label(start_frame, text="Click on the hand to start the game!", font=("Arial", 15),bg='sky blue')
     
     #Packing
     welcome_label.grid(row=0,column=1,sticky='n')
