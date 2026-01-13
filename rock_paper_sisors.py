@@ -9,7 +9,9 @@ def get_date():
     return date_now
 
 def loop():
-    clear_window()
+    #clear_window()
+    selction_frame.grid_forget()
+    #for widget in selction_frame.winfo_children(): widget.destroy()
     selection_but_frame.grid(row=2,column=2,sticky='e')
     selection_frame_comp.grid(row=2,column=0,sticky='e')
     rounds = int(rounds_entry.get())
@@ -39,8 +41,7 @@ def loop():
     #Game over message
     tk.Label(game_tab, text="Game Over!", font=("Arial", 20)).grid(row=0,column=0)
     tk.Label(game_tab, text="Press the hand to play again!", font=("Arial", 15)).grid(row=2,column=1)
-    rock_img1=rock_img.subsample(2)
-    rock_img_butt = tk.Button(game_tab, command=num_rounds, image=rock_img1)
+    rock_img_butt = tk.Button(game_tab, command=num_rounds, image=rock_img)
     rock_img_butt.grid(row=1,column=1)
 
 
@@ -48,7 +49,7 @@ def num_rounds():
     clear_window()
     num_rounds_display()
 
-    ttk.Button(game_tab, text="OK", command=loop).grid(row=2,column=2,sticky='w')
+    ttk.Button(selction_frame, text="OK", command=loop).grid(row=2,column=2,sticky='w')
     win.update()
 
 def choices():
@@ -73,7 +74,7 @@ def choice_selection(rock_img,paper_img,sicssor_img):
     #tk.Label(selection_but_frame).grid(column=1)
 
     wait(rock_img,paper_img,sicssor_img)
-    clear_window()
+    #clear_window()
     print("Computer:", computer," Player:", choice_entry.get())
 
     return computer, choice_entry.get()
@@ -108,8 +109,8 @@ def play_round(rock_img=rock_img, paper_img=paper_img, scissors_img=scissors_img
     #tk.Label(game_tab, text=f"Computer: {computer}",font=("Arial", 20)).grid(row=0,column=0,sticky='e')
     #tk.Label(game_tab, text=f"Player: {choice_entry.get()}",font=("Arial", 20)).grid(row=0,column=2,sticky='w')
      
-    if winner != 'Tie': tk.Label(game_tab, text=f"{winner} is the winner!",font=("Arial", 15)).grid(row=0,column=1,sticky='n')
-    else: tk.Label(game_tab, text="Its a tie!",font=("Arial", 15)).grid(row=0,column=1,sticky='n')
+    if winner != 'Tie': tk.Label(game_tab, text=f"{winner} is the winner!",font=("Arial", 15)).grid(row=1,column=1,sticky='n')
+    else: tk.Label(game_tab, text="Its a tie!",font=("Arial", 15)).grid(row=1,column=1,sticky='n')
     
     return winner
 

@@ -28,7 +28,7 @@ scissors_img=tk.PhotoImage(file="images/scissors.png")
 
 def clear_all_window(frames):
     for widget in game_tab.winfo_children():
-        if widget != selection_but_frame and widget != selection_frame_comp:
+        if widget != selection_but_frame and widget != selection_frame_comp and widget != selction_frame:
             widget.destroy()
     
     for widget in selection_but_frame.winfo_children():
@@ -37,14 +37,18 @@ def clear_all_window(frames):
     for widget in selection_frame_comp.winfo_children():
         widget.destroy()
 
+    for widget in selction_frame.winfo_children():
+        widget.destroy()
+
     if frames == True:
         selection_but_frame.grid_forget()
         selection_frame_comp.grid_forget()
+        #selction_frame.grid_forget()
     
 
 def clear_window(): #Stupid
     for widget in game_tab.winfo_children():
-        if widget != selection_but_frame and widget != selection_frame_comp:
+        if widget != selection_but_frame and widget != selection_frame_comp and widget != selction_frame:
             widget.destroy()
 
 def display_score(player,computer):
@@ -81,6 +85,16 @@ start_frame.rowconfigure(1,weight=1)
 start_frame.rowconfigure(2,weight=1)
 
 start_frame.grid(row=1,column=1)
+
+    #Inner frame rounds selection
+selction_frame = ttk.Frame(game_tab,relief='flat',style='Frame1.TFrame')
+
+selction_frame.columnconfigure(0,weight=1)
+selction_frame.columnconfigure(1,weight=1)
+selction_frame.columnconfigure(2,weight=1)
+selction_frame.rowconfigure(0,weight=1)
+selction_frame.rowconfigure(1,weight=1)
+selction_frame.rowconfigure(2,weight=1)
 
     #Inner frame for player side
 selection_but_frame = ttk.Frame(game_tab,relief='raised')
@@ -123,11 +137,13 @@ def update_tally(player, computer,winner):
 
 rounds_entry = tk.IntVar()
 choice_entry = tk.StringVar()
+rounds_entry.set(1)
 
 def num_rounds_display():
-    tk.Label(game_tab,text='Rock, Paper, Scissors game',font=("Arial",15),bg='sky blue').grid(row=0,column=1,sticky='n')
-    tk.Label(game_tab, text="Enter number of rounds to play: ", font=("Arial", 15),bg='plum2').grid(row=1,column=1,sticky='s')
-    ttk.Entry(game_tab, textvariable=rounds_entry).grid(row=2,column=1)
+    selction_frame.grid(row=1,column=1)
+    tk.Label(selction_frame,text='Rock, Paper, Scissors game',font=("Arial",15),bg='CadetBlue1').grid(row=0,column=1,sticky='n')
+    tk.Label(selction_frame, text="Enter number of rounds to play: ", font=("Arial", 15),bg='dark turquoise').grid(row=1,column=1,sticky='s')
+    ttk.Entry(selction_frame, textvariable=rounds_entry).grid(row=2,column=1)
     win.update()
 
 def show_images_selction(rock_img,paper_img,sicssors_img): #displayes the hand images on player and compters side
@@ -204,12 +220,12 @@ def display_animation(rock_img, paper_img, scissors_img,player_choice,computer_c
     if computer_choice == "rock":   comp=tk.Label(selection_frame_comp, image=rock_img)
     elif computer_choice == "paper": comp=tk.Label(selection_frame_comp, image=paper_img)
     else: comp=tk.Label(selection_frame_comp, image=scissors_img)
-    comp.grid(row=1,column=0,padx=5)
+    comp.grid(row=1,column=0,padx=10,sticky='w')
 
     if player_choice == 'rock': pl=tk.Label(selection_but_frame, image=rock_img)
     elif player_choice == 'paper': pl=tk.Label(selection_but_frame, image=paper_img)
     else: pl=tk.Label(selection_but_frame, image=scissors_img)
-    pl.grid(row=1,column=0)
+    pl.grid(row=1,column=0,padx=10,sticky='e')
 
     comp_text.config(text=f"Choice: {computer_choice}")
 
